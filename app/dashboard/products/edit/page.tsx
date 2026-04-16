@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 
-export default function EditProductPage() {
+function EditProductPageContent() {
   const sp = useSearchParams();
   const initialId = useMemo(() => sp.get("id") ?? "1", [sp]);
 
@@ -148,5 +148,13 @@ export default function EditProductPage() {
         </pre>
       ) : null}
     </div>
+  );
+}
+
+export default function EditProductPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditProductPageContent />
+    </Suspense>
   );
 }

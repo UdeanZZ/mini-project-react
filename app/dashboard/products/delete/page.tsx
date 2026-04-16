@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 
-export default function DeleteProductPage() {
+function DeleteProductPageContent() {
   const router = useRouter();
   const sp = useSearchParams();
   const initialId = useMemo(() => sp.get("id") ?? "1", [sp]);
@@ -93,5 +93,13 @@ export default function DeleteProductPage() {
         </pre>
       ) : null}
     </div>
+  );
+}
+
+export default function DeleteProductPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DeleteProductPageContent />
+    </Suspense>
   );
 }
