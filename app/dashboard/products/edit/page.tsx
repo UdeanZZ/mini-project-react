@@ -10,7 +10,7 @@ function EditProductPageContent() {
   const [id, setId] = useState(initialId);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("0");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +33,7 @@ function EditProductPageContent() {
           id: trimmedId,
           title,
           category,
-          price: Number(price),
+          price,
           description,
         }),
       });
@@ -107,7 +107,7 @@ function EditProductPageContent() {
             </span>
             <input
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
               className="h-11 rounded-xl border border-black/10 bg-transparent px-3 text-sm text-zinc-900 outline-none focus:border-black/30 dark:border-white/15 dark:text-zinc-50 dark:focus:border-white/30"
               type="number"
               min={0}
